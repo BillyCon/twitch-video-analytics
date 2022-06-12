@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+    labels:
+        app: twitch-video-analytics
+    name: twitch-video-analytics-svc
+spec:
+    ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+        app: twitch-video-analytics
+    type: NodePort

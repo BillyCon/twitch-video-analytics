@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: twitch-video-analytics
+spec:
+  selector:
+    matchLabels:
+      run: twitch-video-analytics
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: twitch-video-analytics
+    spec:
+      containers:
+      - image: twitch-video-analytics:v1.1
+        imagePullPolicy: Never
+        name: twitch-video-analytics
+        volumeMounts:
+        - name: secret-config
+          mountPath: /app/.env
+        ports:
+        - containerPort: 8080
+      volumes:
+      - name: secret-config
+        secret:
+          secretName: twitch-video-analytics
